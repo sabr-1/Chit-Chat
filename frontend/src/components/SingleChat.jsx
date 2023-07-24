@@ -19,8 +19,8 @@ import "./styles.css";
 import io from "socket.io-client";
 import Lottie from "react-lottie";
 import animationData from "../animations/typing.json";
-const ENDPOINT = "http://localhost:3000/";
-// const ENDPOINT = "/";
+// const ENDPOINT = "http://localhost:3000/";
+const ENDPOINT = "/";
 
 let socket, selectedChatCompare;
 

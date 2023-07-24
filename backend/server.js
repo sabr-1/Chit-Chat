@@ -13,34 +13,27 @@ const port = process.env.PORT || 3000;
 connectDB();
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // Enable CORS credentials (e.g., cookies, authorization headers)
-    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
 
-app.get("/", (req, res) => {
-  res.send("API is Running.");
-});
+// app.get("/", (req, res) => {
+//   res.send("API is Running.");
+// });
 
-// const __dirname1 = path.resolve();
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname1, "/frontend/dist")));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"));
-//   });
-// } else {
-//   app.get("/", (req, res) => {
-//     res.send("API is Running.");
-//   });
-// }
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1, "frontend", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is Running.");
+  });
+}
 app.use(notFound);
 app.use(errorHandler);
 const server = app.listen(
@@ -51,7 +44,8 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: `http://localhost:5173`,
+    // origin: `http://localhost:5173`,
+    origin: "/",
   },
 });
 io.on("connection", (socket) => {

@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-axios.defaults.baseURL = "http://localhost:3000";
+// axios.defaults.baseURL = "http://localhost:3000";
 const Login = () => {
   const [show, setShow] = useState();
   const [email, setEmail] = useState("");

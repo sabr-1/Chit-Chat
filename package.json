@@ -4,7 +4,7 @@
   "description": "Chat Application using MERN Stack and socket.io",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "node backend/server.js"
   },
   "keywords": [
     "Chat",
